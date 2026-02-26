@@ -9,7 +9,7 @@ const navLinkClass = ({ isActive }) =>
   `block w-full lg:w-auto px-5 py-3.5 lg:inline-block lg:px-5 lg:py-2.5 rounded-xl lg:rounded-full text-[11px] lg:text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
     isActive
       ? "text-white bg-gradient-to-r from-primary to-purple-600 shadow-md"
-      : "text-text hover:text-primary hover:bg-bg1/50"
+      : "text-text hover:text-primary"
   }`;
 
 export default function Navbar() {
@@ -41,7 +41,7 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           scrolled || open
-            ? "bg-bg0/90 backdrop-blur-xl border-b border-border shadow-lg"
+            ? "bg-white/70 dark:bg-[#0B0713]/70 backdrop-blur-xl border-b border-border shadow-md"
             : "bg-transparent"
         }`}
       >
@@ -57,7 +57,7 @@ export default function Navbar() {
           </Link>
 
           {/* DESKTOP NAV */}
-          <nav className="hidden lg:flex items-center gap-2 bg-bg1/70 backdrop-blur-md p-1.5 rounded-full border border-border">
+          <nav className="hidden lg:flex items-center gap-2 bg-white/50 dark:bg-white/5 backdrop-blur-md p-1.5 rounded-full border border-border">
             <NavLink to="/" className={navLinkClass}>Home</NavLink>
             <NavLink to="/about" className={navLinkClass}>About</NavLink>
             <NavLink to="/blog" className={navLinkClass}>Blog</NavLink>
@@ -95,10 +95,7 @@ export default function Navbar() {
           {/* MOBILE BUTTON */}
           <div className="flex lg:hidden items-center gap-3">
             <ThemeToggle />
-            <button
-              onClick={() => setOpen(!open)}
-              className="p-2"
-            >
+            <button onClick={() => setOpen(!open)} className="p-2">
               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {open ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -149,7 +146,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Spacer (except home) */}
+      {/* Spacer */}
       {!isHome && <div className="h-[76px] sm:h-[84px]" />}
     </>
   );
