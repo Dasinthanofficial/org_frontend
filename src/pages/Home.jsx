@@ -9,7 +9,7 @@ import health from "../assets/Health.jpeg";
 import hero from "../assets/hero.jpeg";
 import classroom from "../assets/Classroom.jpeg"; 
 
-import hero1 from "../assets/hero1.jpeg";
+import hero1 from "../assets/Hero1.jpeg";
 
 
 export default function Home() {
