@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import Container from "../components/Container.jsx";
 import { api } from "../lib/api.js";
 
-import education from "../assets/Education.png";
-import livelihood from "../assets/Livelihoods.png"; 
-import health from "../assets/Health.png";
-import hero from "../assets/hero.png";
-import classroom from "../assets/Classroom.png"; // Ensure extension is correct
+import education from "../assets/Education.jpeg";
+import livelihood from "../assets/Livelihoods.jpeg"; 
+import health from "../assets/Health.jpeg";
+import hero from "../assets/hero.jpeg";
+import classroom from "../assets/Classroom.jpeg"; 
 
 export default function Home() {
   const [latest, setLatest] = useState([]);

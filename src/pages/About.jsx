@@ -2,11 +2,11 @@ import React from "react";
 import Container from "../components/Container.jsx";
 import { Link } from "react-router-dom";
 
-import education from "../assets/Education.png";
-import livelihood from "../assets/Livelihoods.png"; 
-import health from "../assets/Health.png";
-import environment from "../assets/Environment.png";
-import parenting from "../assets/Parenting.png";
+import education from "../assets/Education.jpeg";
+import livelihood from "../assets/Livelihoods.jpeg"; 
+import health from "../assets/Health.jpeg";
+import environment from "../assets/Environment.jpeg";
+import parenting from "../assets/Parenting.jpeg";
 
 export default function About() {
   return (
