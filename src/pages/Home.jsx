@@ -122,7 +122,7 @@ export default function Home() {
                 <img
                   src={play}
                   alt="Classroom"
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700"
+                  className="w-full h-full object-cover  transition duration-700"
                 />
               </div>
               <div className="absolute top-10 -right-4 sm:-right-10 w-2/3 aspect-square rounded-[2rem] overflow-hidden border border-white/10 z-0 rotate-[5deg] opacity-60">
