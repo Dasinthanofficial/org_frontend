@@ -8,7 +8,7 @@ import livelihood from "../assets/Livelihoods.jpeg";
 import health from "../assets/Health.jpeg";
 import hero from "../assets/hero.jpeg";
 import classroom from "../assets/Classroom.jpeg"; 
-
+import play from "../assets/play.jpej"
 
 
 export default function Home() {
@@ -120,7 +120,7 @@ export default function Home() {
             <div className="flex-1 relative">
               <div className="relative z-10 rounded-[2rem] overflow-hidden aspect-[4/5] border border-white/10 rotate-[-2deg] hover:rotate-0 transition duration-500">
                 <img
-                  src={classroom}
+                  src={play}
                   alt="Classroom"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700"
                 />
