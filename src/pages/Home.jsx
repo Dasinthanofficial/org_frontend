@@ -8,7 +8,7 @@ import livelihood from "../assets/Livelihoods.jpeg";
 import health from "../assets/Health.jpeg";
 import hero from "../assets/hero.jpeg";
 import classroom from "../assets/Classroom.jpeg"; 
-import play from "../assets/play.jpej"
+import play from "../assets/play.jpeg"
 
 
 export default function Home() {
