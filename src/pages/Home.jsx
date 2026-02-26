@@ -9,7 +9,6 @@ import health from "../assets/Health.jpeg";
 import hero from "../assets/hero.jpeg";
 import classroom from "../assets/Classroom.jpeg"; 
 
-import hero1 from "../assets/Hero1.jpeg";
 
 
 export default function Home() {
@@ -35,7 +34,7 @@ export default function Home() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src={hero1}
+            src={hero}
             alt="Children of Kilinochchi"
             className="w-full h-full object-cover"
           />
