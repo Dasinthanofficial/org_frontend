@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-0: #05030A;
+  --bg-1: #0B0713;
+  --panel: #100A1C;
+  --panel-2: #140C24;
+
+  --text: #F5F3FF;
+  --muted: rgba(245, 243, 255, 0.72);
+  --muted-2: rgba(245, 243, 255, 0.5);
+
+  --primary: #8B5CF6;
+  --primary-2: #A78BFA;
+  --primary-3: #6D28D9;
+
+  --border: rgba(167, 139, 250, 0.14);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(139, 92, 246, 0.22), transparent 55%),
+    radial-gradient(700px 500px at 85% 30%, rgba(167, 139, 250, 0.16), transparent 50%),
+    radial-gradient(900px 600px at 60% 90%, rgba(109, 40, 217, 0.16), transparent 50%),
+    var(--bg-0);
+  color: var(--text);
+}
+
+.glass {
+  background: rgba(16, 10, 28, 0.72);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.hr-soft {
+  border-color: rgba(167, 139, 250, 0.14);
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-0);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
