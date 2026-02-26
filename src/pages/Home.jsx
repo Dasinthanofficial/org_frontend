@@ -4,15 +4,38 @@ import Container from "../components/Container.jsx";
 import { api } from "../lib/api.js";
 
 import education from "../assets/Education.jpeg";
-import livelihood from "../assets/Livelihoods.jpeg"; 
+import livelihood from "../assets/Livelihoods.jpeg";
 import health from "../assets/Health.jpeg";
-import hero from "../assets/hero.jpeg";
-import play from "../assets/play.jpeg"
+import play from "../assets/play.jpeg";
 
 export default function Home() {
   const [latest, setLatest] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // ✅ HERO CAROUSEL STATE
+  const [slides, setSlides] = useState([]);
+  const [current, setCurrent] = useState(0);
+
+  /* ================= FETCH HERO SLIDES ================= */
+  useEffect(() => {
+    api
+      .get("/api/hero")
+      .then(({ data }) => setSlides(data.slides || []))
+      .catch((err) => console.error(err));
+  }, []);
+
+  /* ================= AUTO ROTATE EVERY 10 SECONDS ================= */
+  useEffect(() => {
+    if (!slides.length) return;
+
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [slides]);
+
+  /* ================= FETCH LATEST BLOG ================= */
   useEffect(() => {
     const controller = new AbortController();
     api
@@ -27,28 +50,40 @@ export default function Home() {
 
   return (
     <div className="overflow-x-hidden bg-bg0 text-text transition-colors duration-300">
+      
       {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Improved Frosted Glass Overlay */}
+        
+        {/* ✅ HERO CAROUSEL BACKGROUND */}
         <div className="absolute inset-0 z-0">
-          <img
-            src={hero}
-            alt="Children of Kilinochchi"
-            className="w-full h-full object-cover object-top md:object-right"
-          />
-          {/* 1. Frosted glass layer to soften the busy image */}
+          {slides.length > 0 ? (
+            slides.map((slide, index) => (
+              <img
+                key={slide._id}
+                src={slide.image.url}
+                alt="Hero Slide"
+                className={`absolute inset-0 w-full h-full object-cover object-top md:object-right transition-opacity duration-1000 ease-in-out ${
+                  index === current ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            ))
+          ) : (
+            <div className="absolute inset-0 bg-black" />
+          )}
+
+          {/* 1. Frosted glass overlay */}
           <div className="absolute inset-0 bg-bg0/50 backdrop-blur-[3px] transition-colors duration-300"></div>
-          
-          {/* 2. Left-to-right gradient for perfect text readability */}
+
+          {/* 2. Left-to-right gradient */}
           <div className="absolute inset-0 bg-gradient-to-r from-bg0 via-bg0/80 to-transparent w-full md:w-[85%] transition-colors duration-300"></div>
-          
-          {/* 3. Bottom fade to blend seamlessly into the stats section below */}
+
+          {/* 3. Bottom fade */}
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg0 to-transparent transition-colors duration-300"></div>
         </div>
 
         <Container className="relative z-10 pt-20 pb-10">
           <div className="max-w-3xl">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-serif font-bold text-text leading-[1] tracking-tight mb-6 transition-colors duration-300 drop-shadow-sm">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-serif font-bold text-text leading-[1] tracking-tight mb-6 drop-shadow-sm">
               ACTION <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-primary italic pr-2 font-medium">
                 FOR
@@ -57,7 +92,7 @@ export default function Home() {
               LIFE.
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-text/80 max-w-xl leading-relaxed mb-10 font-medium transition-colors duration-300">
+            <p className="text-base sm:text-lg md:text-xl text-text/80 max-w-xl leading-relaxed mb-10 font-medium">
               Empowering the war-affected communities of Kilinochchi through
               education, nutrition, and sustainable livelihood programs.
             </p>
@@ -65,26 +100,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
               <Link
                 to="/join"
-                className="px-8 py-4 rounded-full bg-text text-bg0 font-bold tracking-wider uppercase text-xs hover:bg-primary hover:text-white transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2"
+                className="px-8 py-4 rounded-full bg-text text-bg0 font-bold tracking-wider uppercase text-xs hover:bg-primary hover:text-white transition-all shadow-lg active:scale-[0.98]"
               >
                 Get Involved
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
               </Link>
               <Link
                 to="/about"
-                className="px-8 py-4 rounded-full border-2 border-text/20 text-text font-bold tracking-wider uppercase text-xs hover:border-text hover:bg-text/5 transition-all active:scale-[0.98] flex items-center justify-center"
+                className="px-8 py-4 rounded-full border-2 border-text/20 text-text font-bold tracking-wider uppercase text-xs hover:border-text hover:bg-text/5 transition-all active:scale-[0.98]"
               >
                 Our Story
               </Link>
@@ -96,7 +118,7 @@ export default function Home() {
       {/* ================= STATS STRIP ================= */}
       <section className="relative z-20 -mt-10 sm:-mt-16">
         <Container>
-          <div className="glass rounded-[1.5rem] sm:rounded-[2.5rem] p-6 sm:p-10 grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 border border-border shadow-2xl bg-panel/90 backdrop-blur-xl transition-colors duration-300">
+          <div className="glass rounded-[1.5rem] sm:rounded-[2.5rem] p-6 sm:p-10 grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 border border-border shadow-2xl bg-panel/90 backdrop-blur-xl">
             {[
               { label: "Years Active", value: "16+" },
               { label: "Families Helped", value: "2k+" },
@@ -104,7 +126,7 @@ export default function Home() {
               { label: "Active Programs", value: "05" },
             ].map((stat, i) => (
               <div key={i} className="text-center sm:text-left">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text mb-2 transition-colors duration-300">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text mb-2">
                   {stat.value}
                 </div>
                 <div className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] text-primary uppercase">
@@ -115,6 +137,7 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
 
       {/* ================= MISSION STATEMENT ================= */}
       <section className="py-20 sm:py-32">

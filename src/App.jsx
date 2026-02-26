@@ -19,6 +19,7 @@ import AdminPosts from "./admin/pages/Posts.jsx";
 import PostEditor from "./admin/pages/PostEditor.jsx";
 
 import { setAuthToken } from "./lib/api.js";
+import HeroManager from "./admin/pages/HeroManager.jsx";
 
 export default function App() {
   const location = useLocation();
@@ -60,9 +61,11 @@ export default function App() {
               path="posts/:id/edit"
               element={<PostEditor mode="edit" />}
             />
+             <Route path="hero" element={<HeroManager />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
+         
         </Routes>
       </main>
 

@@ -17,7 +17,10 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-bg0 text-text flex flex-col font-sans transition-colors duration-300">
+      
+      {/* ================= HEADER ================= */}
       <header className="sticky top-0 z-50 bg-bg1/90 backdrop-blur-xl border-b border-border px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between transition-colors duration-300">
+        
         <Link to="/admin/posts" className="flex items-center gap-2 sm:gap-3 group">
           <div className="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-text flex items-center justify-center text-bg0 font-black text-base sm:text-lg transition-colors duration-300 group-hover:scale-105">
             A
@@ -27,12 +30,14 @@ export default function AdminLayout() {
               ABL Admin
             </div>
             <div className="text-[7px] sm:text-[8px] font-bold tracking-[0.2em] sm:tracking-[0.3em] text-primary uppercase mt-0.5 hidden sm:block">
-              Blog Manager
+              Dashboard
             </div>
           </div>
         </Link>
 
+        {/* ✅ NAVIGATION */}
         <nav className="flex items-center gap-1 sm:gap-2">
+          
           <Link
             to="/admin/posts"
             className={`px-3 sm:px-5 py-2 rounded-xl text-[10px] sm:text-xs font-bold tracking-wider uppercase transition-all ${
@@ -42,6 +47,18 @@ export default function AdminLayout() {
             }`}
           >
             Posts
+          </Link>
+
+          {/* ✅ HERO LINK ADDED */}
+          <Link
+            to="/admin/hero"
+            className={`px-3 sm:px-5 py-2 rounded-xl text-[10px] sm:text-xs font-bold tracking-wider uppercase transition-all ${
+              isActive("/hero")
+                ? "bg-primary/10 text-primary"
+                : "text-muted hover:text-text hover:bg-bg1"
+            }`}
+          >
+            Hero
           </Link>
         </nav>
 
@@ -57,6 +74,7 @@ export default function AdminLayout() {
         </div>
       </header>
 
+      {/* ================= CONTENT ================= */}
       <main className="flex-1 p-4 sm:p-6 md:p-8 max-w-6xl mx-auto w-full">
         <Outlet />
       </main>
