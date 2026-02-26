@@ -12,7 +12,7 @@ export default function Home() {
   const [latest, setLatest] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ✅ HERO CAROUSEL STATE
+  // HERO CAROUSEL STATE
   const [slides, setSlides] = useState([]);
   const [current, setCurrent] = useState(0);
 
@@ -54,7 +54,7 @@ export default function Home() {
       {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         
-        {/* ✅ HERO CAROUSEL BACKGROUND */}
+        {/* HERO CAROUSEL BACKGROUND */}
         <div className="absolute inset-0 z-0">
           {slides.length > 0 ? (
             slides.map((slide, index) => (
@@ -106,7 +106,7 @@ export default function Home() {
               </Link>
               <Link
                 to="/about"
-                className="px-8 py-4 rounded-full border-2 border-text/20 text-text font-bold tracking-wider uppercase text-xs hover:border-text hover:bg-text/5 transition-all active:scale-[0.98]"
+                className="px-8 py-4 rounded-full border-2 border-border text-text font-bold tracking-wider uppercase text-xs hover:bg-bg1 transition-all active:scale-[0.98]"
               >
                 Our Story
               </Link>
@@ -137,7 +137,6 @@ export default function Home() {
           </div>
         </Container>
       </section>
-
 
       {/* ================= MISSION STATEMENT ================= */}
       <section className="py-20 sm:py-32">
@@ -185,7 +184,7 @@ export default function Home() {
                   "Parental Guidance",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-primary/10 border border-border flex items-center justify-center text-primary shrink-0">
                       <svg
                         className="w-3 h-3"
                         fill="none"
@@ -252,14 +251,13 @@ export default function Home() {
             ].map((card, i) => (
               <div
                 key={i}
-                className="group relative h-[350px] sm:h-[400px] rounded-[2rem] overflow-hidden cursor-pointer shadow-lg border border-border/50"
+                className="group relative h-[350px] sm:h-[400px] rounded-[2rem] overflow-hidden cursor-pointer shadow-lg border border-border"
               >
                 <img
                   src={card.img}
                   alt={card.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                {/* Note: Card text remains white because it sits on top of a dark gradient regardless of theme */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <div className="w-10 h-1 bg-primary mb-4 rounded-full"></div>
@@ -311,7 +309,7 @@ export default function Home() {
                 <Link
                   key={post._id}
                   to={`/blog/${post.slug}`}
-                  className="group block p-4 sm:p-5 rounded-[1.5rem] bg-panel border border-border hover:border-primary/40 transition-all duration-300 shadow-sm hover:shadow-xl"
+                  className="group block p-4 sm:p-5 rounded-[1.5rem] bg-panel border border-border hover:border-primary transition-all duration-300 shadow-sm hover:shadow-xl"
                 >
                   <div className="aspect-[16/10] rounded-xl overflow-hidden mb-5 bg-bg1 border border-border">
                     {post.coverImage?.url ? (
