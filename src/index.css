@@ -2,7 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* DEFAULT (LIGHT MODE) */
 :root {
+  --bg-0: #FFFFFF;
+  --bg-1: #F3F4F6;
+  --panel: #FFFFFF;
+  --panel-2: #F9FAFB;
+
+  --text: #1F2937;
+  /* Dark Gray text */
+  --muted: #4B5563;
+  --muted-2: #9CA3AF;
+
+  --primary: #8B5CF6;
+  --primary-2: #A78BFA;
+  --border: rgba(139, 92, 246, 0.15);
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.05);
+}
+
+/* DARK MODE OVERRIDES */
+.dark {
+  color-scheme: dark;
   --bg-0: #05030A;
   --bg-1: #0B0713;
   --panel: #100A1C;
@@ -14,9 +36,10 @@
 
   --primary: #8B5CF6;
   --primary-2: #A78BFA;
-  --primary-3: #6D28D9;
-
   --border: rgba(167, 139, 250, 0.14);
+
+  --glass-bg: rgba(16, 10, 28, 0.72);
+  --glass-border: rgba(167, 139, 250, 0.14);
 }
 
 html,
@@ -25,35 +48,43 @@ body {
 }
 
 body {
-  background:
-    radial-gradient(900px 600px at 20% 10%, rgba(139, 92, 246, 0.22), transparent 55%),
-    radial-gradient(700px 500px at 85% 30%, rgba(167, 139, 250, 0.16), transparent 50%),
-    radial-gradient(900px 600px at 60% 90%, rgba(109, 40, 217, 0.16), transparent 50%),
-    var(--bg-0);
+  background-color: var(--bg-0);
   color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apply background pattern only in dark mode if desired, or adjust opacity for light */
+.dark body {
+  background-image:
+    radial-gradient(900px 600px at 20% 10%, rgba(139, 92, 246, 0.15), transparent 55%),
+    radial-gradient(700px 500px at 85% 30%, rgba(167, 139, 250, 0.1), transparent 50%),
+    radial-gradient(900px 600px at 60% 90%, rgba(109, 40, 217, 0.1), transparent 50%);
 }
 
 .glass {
-  background: rgba(16, 10, 28, 0.72);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(10px);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
 }
 
 .hr-soft {
-  border-color: rgba(167, 139, 250, 0.14);
+  border-color: var(--border);
 }
 
-/* Custom scrollbar for dark theme */
+/* Scrollbar logic */
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-0);
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(139, 92, 246, 0.3);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(139, 92, 246, 0.5);
 }

@@ -32,7 +32,7 @@ export default function Blog() {
   }, [page]);
 
   return (
-    <div className="pt-8 sm:pt-10 pb-16">
+    <div className="pt-8 sm:pt-10 pb-16 bg-bg0 min-h-screen text-text transition-colors duration-300">
       <Container>
         <SectionTitle
           kicker="Blog"
@@ -57,7 +57,7 @@ export default function Blog() {
         {!loading && data.pages > 1 && (
           <div className="mt-8 flex items-center justify-center gap-3">
             <button
-              className="glass rounded-xl px-4 py-2 text-sm disabled:opacity-50"
+              className="glass bg-panel border border-border rounded-xl px-4 py-2 text-sm disabled:opacity-50 text-text hover:bg-bg1 transition"
               disabled={page <= 1}
               onClick={() => setPage((p) => p - 1)}
             >
@@ -67,7 +67,7 @@ export default function Blog() {
               Page {data.page} / {data.pages}
             </div>
             <button
-              className="glass rounded-xl px-4 py-2 text-sm disabled:opacity-50"
+              className="glass bg-panel border border-border rounded-xl px-4 py-2 text-sm disabled:opacity-50 text-text hover:bg-bg1 transition"
               disabled={page >= data.pages}
               onClick={() => setPage((p) => p + 1)}
             >

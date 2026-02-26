@@ -4,9 +4,9 @@ export default function BlogCard({ post }) {
   return (
     <Link
       to={`/blog/${post.slug}`}
-      className="glass rounded-2xl overflow-hidden hover:bg-[rgba(20,12,36,.78)] transition group"
+      className="glass bg-panel border border-border rounded-2xl overflow-hidden hover:bg-bg1 dark:hover:bg-white/5 transition group block"
     >
-      <div className="aspect-[16/9] bg-black/30 overflow-hidden">
+      <div className="aspect-[16/9] bg-black/10 dark:bg-black/30 overflow-hidden">
         {post.coverImage?.url ? (
           <img
             src={post.coverImage.url}
@@ -22,10 +22,10 @@ export default function BlogCard({ post }) {
         )}
       </div>
       <div className="p-4">
-        <div className="text-xs text-violet-200/80 tracking-wide">
+        <div className="text-xs text-primary tracking-wide font-medium">
           {post.category || "General"}
         </div>
-        <div className="mt-1 text-base font-semibold leading-snug">
+        <div className="mt-1 text-base font-semibold leading-snug text-text">
           {post.title}
         </div>
         {post.excerpt && (
