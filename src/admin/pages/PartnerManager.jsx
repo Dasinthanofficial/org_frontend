@@ -174,7 +174,7 @@ export default function PartnerManager() {
       {loading ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
           {[1, 2, 3, 4].map(i => (
-            <div key={i} className="h-32 bg-bg1 rounded-2xl animate-pulse border border-border"></div>
+            <div key={i} className="h-44 bg-bg1 rounded-2xl animate-pulse border border-border"></div>
           ))}
         </div>
       ) : partners.length === 0 ? (
@@ -186,36 +186,39 @@ export default function PartnerManager() {
           {partners.map((p) => (
             <div
               key={p._id}
-              className="group bg-panel border border-border rounded-2xl p-4 sm:p-5 text-center relative hover:border-primary/50 hover:shadow-md transition-all duration-300 flex flex-col items-center justify-center min-h-[140px]"
+              className="group bg-panel border border-border rounded-2xl overflow-hidden text-center relative hover:border-primary/50 hover:shadow-md transition-all duration-300 flex flex-col"
             >
-              {/* Image with grayscale effect that turns colored on hover */}
-              <div className="h-14 sm:h-16 flex items-center justify-center w-full mb-3">
+              {/* Edge-to-Edge Image Block - Matches Homepage Fix */}
+              <div className="w-full h-28 sm:h-32 bg-bg1 relative flex items-center justify-center border-b border-border">
                 <img
-                  src={`${p.logo.url}?f_auto,q_auto,w_300`}
+                  src={`${p.logo.url}?f_auto,q_auto,w_400`}
                   alt={p.name}
-                  className="max-h-full max-w-full object-contain filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 dark:group-hover:bg-white/5 transition-colors duration-500 pointer-events-none"></div>
               </div>
               
-              <div className="text-xs sm:text-sm font-semibold text-text truncate w-full">
-                {p.name}
+              {/* Text Info Block */}
+              <div className="p-4 flex flex-col items-center justify-center flex-1">
+                <div className="text-xs sm:text-sm font-bold text-text truncate w-full">
+                  {p.name}
+                </div>
+                {p.website && (
+                  <a 
+                    href={p.website} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-[9px] text-primary hover:underline truncate w-full mt-1 block"
+                  >
+                    {p.website.replace(/^https?:\/\//, '')}
+                  </a>
+                )}
               </div>
-              
-              {p.website && (
-                <a 
-                  href={p.website} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-[9px] text-primary hover:underline truncate w-full mt-0.5 block"
-                >
-                  {p.website.replace(/^https?:\/\//, '')}
-                </a>
-              )}
 
-              {/* Delete Button - Always visible on mobile, hover on desktop */}
+              {/* Delete Button - Styled beautifully to sit on top of photos */}
               <button
                 onClick={() => remove(p._id)}
-                className="absolute top-2 right-2 w-7 h-7 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white rounded-full flex items-center justify-center transition-all duration-200 opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+                className="absolute top-2 right-2 w-7 h-7 bg-red-500/80 backdrop-blur-md hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all duration-200 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 shadow-sm"
                 aria-label="Remove Partner"
               >
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
