@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import ScrollToTop from "./components/ScrollToTop.jsx";
@@ -17,20 +17,20 @@ import AdminLayout from "./admin/AdminLayout.jsx";
 import AdminLogin from "./admin/pages/Login.jsx";
 import AdminPosts from "./admin/pages/Posts.jsx";
 import PostEditor from "./admin/pages/PostEditor.jsx";
+import HeroManager from "./admin/pages/HeroManager.jsx";
+import PartnerManager from "./admin/pages/PartnerManager.jsx";
 
 import { setAuthToken } from "./lib/api.js";
-import HeroManager from "./admin/pages/HeroManager.jsx";
-
-import PartnerManager from "./admin/pages/PartnerManager.jsx";
 
 export default function App() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
 
-  useEffect(() => {
-    const token = localStorage.getItem("admin_token");
+  // ✅ FIX: Restore token immediately before render
+  const token = localStorage.getItem("admin_token");
+  if (token) {
     setAuthToken(token);
-  }, []);
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -48,6 +48,7 @@ export default function App() {
           <Route path="/join" element={<Join />} />
 
           <Route path="/admin/login" element={<AdminLogin />} />
+
           <Route
             path="/admin"
             element={
@@ -59,17 +60,12 @@ export default function App() {
             <Route index element={<Navigate to="/admin/posts" replace />} />
             <Route path="posts" element={<AdminPosts />} />
             <Route path="posts/new" element={<PostEditor mode="create" />} />
-            <Route
-              path="posts/:id/edit"
-              element={<PostEditor mode="edit" />}
-            />
-             <Route path="hero" element={<HeroManager />} />
-
-             <Route path="partners" element={<PartnerManager />} />
+            <Route path="posts/:id/edit" element={<PostEditor mode="edit" />} />
+            <Route path="hero" element={<HeroManager />} />
+            <Route path="partners" element={<PartnerManager />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
-         
         </Routes>
       </main>
 
