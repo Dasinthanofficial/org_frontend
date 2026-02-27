@@ -174,7 +174,7 @@ export default function PartnerManager() {
       {loading ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
           {[1, 2, 3, 4].map(i => (
-            <div key={i} className="h-44 bg-bg1 rounded-2xl animate-pulse border border-border"></div>
+            <div key={i} className="h-48 bg-bg1 rounded-2xl animate-pulse border border-border"></div>
           ))}
         </div>
       ) : partners.length === 0 ? (
@@ -186,20 +186,20 @@ export default function PartnerManager() {
           {partners.map((p) => (
             <div
               key={p._id}
-              className="group bg-panel border border-border rounded-2xl overflow-hidden text-center relative hover:border-primary/50 hover:shadow-md transition-all duration-300 flex flex-col"
+              className="group bg-panel border border-border/50 rounded-2xl overflow-hidden text-center relative hover:border-primary/50 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-lg transition-all duration-300 flex flex-col"
             >
-              {/* Edge-to-Edge Image Block - Matches Homepage Fix */}
-              <div className="w-full h-28 sm:h-32 bg-bg1 relative flex items-center justify-center border-b border-border">
+              {/* Flawless Edge-to-Edge Image Block - Using Absolute Inset */}
+              <div className="w-full h-28 sm:h-32 bg-transparent relative overflow-hidden">
                 <img
                   src={`${p.logo.url}?f_auto,q_auto,w_400`}
                   alt={p.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out border-none outline-none"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 dark:group-hover:bg-white/5 transition-colors duration-500 pointer-events-none"></div>
               </div>
               
               {/* Text Info Block */}
-              <div className="p-4 flex flex-col items-center justify-center flex-1">
+              <div className="p-4 flex flex-col items-center justify-center flex-1 bg-panel relative z-10 border-t border-border/30">
                 <div className="text-xs sm:text-sm font-bold text-text truncate w-full">
                   {p.name}
                 </div>
@@ -215,10 +215,10 @@ export default function PartnerManager() {
                 )}
               </div>
 
-              {/* Delete Button - Styled beautifully to sit on top of photos */}
+              {/* Delete Button */}
               <button
                 onClick={() => remove(p._id)}
-                className="absolute top-2 right-2 w-7 h-7 bg-red-500/80 backdrop-blur-md hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all duration-200 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 shadow-sm"
+                className="absolute top-2 right-2 w-7 h-7 bg-red-500/90 backdrop-blur-md hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all duration-200 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 shadow-sm z-20"
                 aria-label="Remove Partner"
               >
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
