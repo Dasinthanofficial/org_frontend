@@ -350,12 +350,11 @@ export default function Home() {
           )}
         </Container>
       </section>
-
-           {/* ================= PARTNER CAROUSEL ================= */}
+      {/* ================= PARTNER CAROUSEL ================= */}
       {partners.length > 0 && (
         <section className="py-16 sm:py-24 bg-bg0 relative overflow-hidden border-y border-border transition-colors duration-300">
-          
-          {/* Subtle Background Glow for Liquid Effect */}
+
+          {/* Subtle Background Glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
           <Container className="relative z-10">
@@ -369,8 +368,8 @@ export default function Home() {
             </div>
           </Container>
 
-          {/* Carousel Track Container with CSS Fading Edges */}
-          <div 
+          {/* Carousel Track */}
+          <div
             className="relative w-full max-w-[1600px] mx-auto overflow-hidden z-10"
             style={{
               maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
@@ -378,8 +377,7 @@ export default function Home() {
             }}
           >
             <div className="flex gap-6 sm:gap-8 px-4 py-8 animate-partner-scroll hover:[animation-play-state:paused] w-max">
-              
-              {/* Duplicated for seamless infinite loop */}
+
               {[...partners, ...partners, ...partners, ...partners].map((partner, index) => (
                 <a
                   key={index}
@@ -387,27 +385,35 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex flex-col w-[240px] sm:w-[280px] 
-                             rounded-[1.5rem] sm:rounded-[2rem] bg-panel backdrop-blur-xl 
-                             border border-border overflow-hidden
-                             shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)]
-                             hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:border-primary/50
-                             transition-all duration-500 ease-out flex-shrink-0"
+                       rounded-[1.5rem] sm:rounded-[2rem] bg-panel backdrop-blur-xl 
+                       border border-border overflow-hidden
+                       shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)]
+                       hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:border-primary/50
+                       transition-all duration-500 ease-out flex-shrink-0"
                 >
-                  {/* Edge-to-Edge Image Container - No padding, no weird borders! */}
-                  <div className="w-full h-36 sm:h-44 bg-bg1 relative flex items-center justify-center border-b border-border">
+                  {/* 
+                UPDATED: Image Container 
+                Changed h-36 sm:h-44  ->  h-16 sm:h-24 (Reduced height by ~50%)
+            */}
+                  <div className="w-full h-16 sm:h-24 bg-bg1 relative flex items-center justify-center border-b border-border">
                     <img
                       src={`${partner.logo.url}?f_auto,q_auto,w_400`}
                       alt={partner.name}
                       loading="lazy"
+                      /* 
+                         Suggestion: If logos get cut off because the box is short, 
+                         change 'object-cover' to 'object-contain' and add 'p-2' padding.
+                      */
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
                     />
-                    {/* Darkens very slightly on hover instead of a white glare */}
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 dark:group-hover:bg-white/5 transition-colors duration-500 pointer-events-none"></div>
                   </div>
 
-                  {/* Partner Name Area */}
-                  <div className="w-full py-5 text-center px-4">
-                    <span className="text-sm sm:text-base font-bold text-text tracking-wide group-hover:text-primary transition-colors duration-300">
+                  {/* 
+                800px x 300px 
+            */}
+                  <div className="w-full py-1 text-center px-4">
+                    <span className="text-sm sm:text-base italic text-text tracking-wide group-hover:text-primary transition-colors duration-300">
                       {partner.name}
                     </span>
                   </div>
@@ -417,8 +423,6 @@ export default function Home() {
           </div>
         </section>
       )}
-
-      
       {/* ================= FINAL CTA ================= */}
       <section className="pb-20">
         <Container>

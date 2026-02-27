@@ -4,6 +4,7 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+import BuyMeCoffee from "./components/BuyMeCoffee.jsx"; // <--- 1. Import
 
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
@@ -26,7 +27,6 @@ export default function App() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
 
-  // ✅ FIX: Restore token immediately before render
   const token = localStorage.getItem("admin_token");
   if (token) {
     setAuthToken(token);
@@ -70,6 +70,10 @@ export default function App() {
       </main>
 
       {!isAdmin && <Footer />}
+
+      {/* <--- 2. Add Component Here ---> */}
+      {!isAdmin && <BuyMeCoffee />}
+      
     </div>
   );
 }

@@ -6,11 +6,14 @@ import logo from "../assets/logo.jpeg";
 import ThemeToggle from "./ThemeToggle.jsx";
 
 const navLinkClass = ({ isActive }) =>
-  `block w-full lg:w-auto px-5 py-3.5 lg:inline-block lg:px-5 lg:py-2.5 rounded-xl lg:rounded-full text-[11px] lg:text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
-    isActive
-      ? "text-white bg-gradient-to-r from-primary to-purple-600 shadow-md"
-      : "text-text hover:text-primary"
-  }`;
+  `block w-full lg:w-auto px-5 py-3.5 lg:inline-block lg:px-5 lg:py-2.5 
+   rounded-xl lg:rounded-full 
+   text-[14px] lg:text-[14px]
+   font-bold tracking-[0.2em] transition-all duration-300 ${
+     isActive
+       ? "text-white bg-gradient-to-r from-primary to-purple-600 shadow-md"
+       : "text-text hover:text-primary"
+   }`;
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -59,8 +62,8 @@ export default function Navbar() {
           {/* DESKTOP NAV */}
           <nav className="hidden lg:flex items-center gap-2 bg-white/50 dark:bg-white/5 backdrop-blur-md p-1.5 rounded-full border border-border">
             <NavLink to="/" className={navLinkClass}>Home</NavLink>
-            <NavLink to="/about" className={navLinkClass}>About</NavLink>
-            <NavLink to="/blog" className={navLinkClass}>Blog</NavLink>
+            <NavLink to="/about" className={navLinkClass}>About ABLe</NavLink>
+            <NavLink to="/blog" className={navLinkClass}>What We Do</NavLink>
             <NavLink to="/join" className={navLinkClass}>Get Involved</NavLink>
           </nav>
 
@@ -69,7 +72,7 @@ export default function Navbar() {
             <ThemeToggle />
             <Link
               to="/contact"
-              className="px-6 py-2.5 rounded-full bg-text text-bg0 text-[10px] font-bold tracking-widest uppercase hover:opacity-90 transition"
+              className="px-6 py-2.5 rounded-full bg-text text-bg0 text-[14px] font-bold tracking-widest uppercase hover:opacity-90 transition"
             >
               Contact
             </Link>

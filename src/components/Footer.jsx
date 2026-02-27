@@ -9,9 +9,14 @@ export default function Footer() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] md:w-[50%] h-[300px] bg-primary/10 blur-[120px] pointer-events-none z-0"></div>
 
       <Container className="relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 mb-12 sm:mb-16">
-          {/* Brand */}
-          <div className="sm:col-span-2 lg:col-span-5">
+        {/* 
+            GRID LAYOUT FIX:
+            Brand (4 cols) + Explore (2 cols) + Programs (2 cols) + Contact (4 cols) = 12 Total
+        */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 mb-12 sm:mb-16">
+          
+          {/* 1. BRAND SECTION (Takes 4 Columns) */}
+          <div className="sm:col-span-2 lg:col-span-4">
             <Link to="/" className="inline-flex items-center gap-3 group">
               <div className="w-8 h-8 rounded-full bg-text flex items-center justify-center text-bg0 font-black text-lg shadow-md transition-colors duration-300 group-hover:scale-105">
                 A
@@ -28,10 +33,10 @@ export default function Footer() {
             <p className="mt-5 sm:mt-6 text-sm text-muted max-w-sm leading-relaxed">
               Empowering individuals with knowledge, resources, and networks to
               create sustainable change in communities across Sri Lanka since
-              2008. Supported by Hope4Child Canada.
+              2008.
             </p>
 
-            {/* Social */}
+            {/* Social Icons */}
             <div className="mt-6 sm:mt-8 flex items-center gap-3">
               <a
                 href="https://facebook.com/action4bl"
@@ -47,8 +52,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="lg:col-span-2 lg:col-start-7">
+          {/* 2. EXPLORE (Takes 2 Columns) */}
+          <div className="lg:col-span-2">
             <h4 className="text-[10px] font-bold tracking-[0.2em] text-text uppercase mb-5 sm:mb-6 transition-colors duration-300">
               Explore
             </h4>
@@ -63,9 +68,9 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="text-sm text-muted hover:text-primary transition-colors inline-flex items-center gap-2 group"
+                    className="text-sm text-muted hover:text-white transition-colors inline-flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-border group-hover:bg-primary transition-colors"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-border  transition-colors"></span>
                     {link.name}
                   </Link>
                 </li>
@@ -73,7 +78,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Programs */}
+          {/* 3. PROGRAMS (Takes 2 Columns) */}
           <div className="lg:col-span-2">
             <h4 className="text-[10px] font-bold tracking-[0.2em] text-text uppercase mb-5 sm:mb-6 transition-colors duration-300">
               Programs
@@ -89,7 +94,7 @@ export default function Footer() {
                 <li key={prog}>
                   <Link
                     to="/about"
-                    className="text-sm text-muted hover:text-primary transition-colors inline-flex items-center gap-2 group"
+                    className="text-sm text-muted hover:text-white transition-colors inline-flex items-center gap-2 group"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-border group-hover:bg-primary transition-colors"></span>
                     {prog}
@@ -99,8 +104,8 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div className="sm:col-span-2 lg:col-span-3">
+          {/* 4. CONTACT (Takes 4 Columns) - Now fits on same row */}
+          <div className="sm:col-span-2 lg:col-span-4">
             <h4 className="text-[10px] font-bold tracking-[0.2em] text-text uppercase mb-5 sm:mb-6 transition-colors duration-300">
               Contact
             </h4>
@@ -141,7 +146,7 @@ export default function Footer() {
                   />
                 </svg>
                 <a href="tel:+94778866819" className="hover:text-text transition-colors">
-                  +94 77 886 6819
+                  +94 75 177 1778
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-muted">
@@ -174,25 +179,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Partners */}
-        <div className="py-6 sm:py-8 border-t border-b border-border mb-6 sm:mb-8 transition-colors duration-300">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-center">
-            <span className="text-[10px] font-bold tracking-[0.2em] text-muted uppercase">
-              In Partnership With
-            </span>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-bold">
-                H
-              </div>
-              <span className="text-sm text-text font-semibold transition-colors duration-300">
-                Hope4Child Canada
-              </span>
-            </div>
-          </div>
-        </div>
-
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left border-t border-border/50 pt-8">
           <div className="text-[10px] font-bold tracking-[0.2em] text-muted uppercase">
             &copy; {new Date().getFullYear()} Action for{" "}
             <span className="text-primary">Better Life</span>. All Rights
