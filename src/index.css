@@ -88,3 +88,24 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(139, 92, 246, 0.5);
 }
+
+
+
+/* ================= PARTNER CAROUSEL ================= */
+
+@keyframes partnerScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-partner-scroll {
+  animation: partnerScroll 30s linear infinite;
+}
+
+.animate-partner-scroll:hover {
+  animation-play-state: paused;
+}

@@ -21,6 +21,8 @@ import PostEditor from "./admin/pages/PostEditor.jsx";
 import { setAuthToken } from "./lib/api.js";
 import HeroManager from "./admin/pages/HeroManager.jsx";
 
+import PartnerManager from "./admin/pages/PartnerManager.jsx";
+
 export default function App() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
@@ -62,6 +64,8 @@ export default function App() {
               element={<PostEditor mode="edit" />}
             />
              <Route path="hero" element={<HeroManager />} />
+
+             <Route path="partners" element={<PartnerManager />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

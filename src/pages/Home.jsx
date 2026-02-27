@@ -16,6 +16,17 @@ export default function Home() {
   const [slides, setSlides] = useState([]);
   const [current, setCurrent] = useState(0);
 
+  const [partners, setPartners] = useState([]);
+
+
+  /* ================= FETCH PARTNERS ================= */
+  useEffect(() => {
+    api
+      .get("/api/partners")
+      .then(({ data }) => setPartners(data.partners || []))
+      .catch((err) => console.error(err));
+  }, []);
+
   /* ================= FETCH HERO SLIDES ================= */
   useEffect(() => {
     api
@@ -50,10 +61,10 @@ export default function Home() {
 
   return (
     <div className="overflow-x-hidden bg-bg0 text-text transition-colors duration-300">
-      
+
       {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        
+
         {/* HERO CAROUSEL BACKGROUND */}
         <div className="absolute inset-0 z-0">
           {slides.length > 0 ? (
@@ -62,9 +73,8 @@ export default function Home() {
                 key={slide._id}
                 src={slide.image.url}
                 alt="Hero Slide"
-                className={`absolute inset-0 w-full h-full object-cover object-top md:object-right transition-opacity duration-1000 ease-in-out ${
-                  index === current ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 w-full h-full object-cover object-top md:object-right transition-opacity duration-1000 ease-in-out ${index === current ? "opacity-100" : "opacity-0"
+                  }`}
               />
             ))
           ) : (
@@ -226,7 +236,7 @@ export default function Home() {
               to="/about"
               className="text-primary text-sm font-bold tracking-widest uppercase hover:text-text transition-colors flex items-center gap-2 group"
             >
-              View all programs 
+              View all programs
               <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
             </Link>
           </div>
@@ -292,7 +302,7 @@ export default function Home() {
               to="/blog"
               className="text-primary text-sm font-bold tracking-widest uppercase hover:text-text transition-colors flex items-center gap-2 group"
             >
-              View all posts 
+              View all posts
               <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
             </Link>
           </div>
@@ -341,6 +351,74 @@ export default function Home() {
         </Container>
       </section>
 
+           {/* ================= PARTNER CAROUSEL ================= */}
+      {partners.length > 0 && (
+        <section className="py-16 sm:py-24 bg-bg0 relative overflow-hidden border-y border-border transition-colors duration-300">
+          
+          {/* Subtle Background Glow for Liquid Effect */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+          <Container className="relative z-10">
+            <div className="text-center mb-10 sm:mb-14">
+              <span className="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-primary">
+                Our Partners
+              </span>
+              <h3 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-text">
+                Trusted Organizations
+              </h3>
+            </div>
+          </Container>
+
+          {/* Carousel Track Container with CSS Fading Edges */}
+          <div 
+            className="relative w-full max-w-[1600px] mx-auto overflow-hidden z-10"
+            style={{
+              maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+              WebkitMaskImage: '-webkit-linear-gradient(left, transparent, black 10%, black 90%, transparent)'
+            }}
+          >
+            <div className="flex gap-6 sm:gap-8 px-4 py-8 animate-partner-scroll hover:[animation-play-state:paused] w-max">
+              
+              {/* Duplicated for seamless infinite loop */}
+              {[...partners, ...partners, ...partners, ...partners].map((partner, index) => (
+                <a
+                  key={index}
+                  href={partner.website || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col w-[240px] sm:w-[280px] 
+                             rounded-[1.5rem] sm:rounded-[2rem] bg-panel backdrop-blur-xl 
+                             border border-border overflow-hidden
+                             shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)]
+                             hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:border-primary/50
+                             transition-all duration-500 ease-out flex-shrink-0"
+                >
+                  {/* Edge-to-Edge Image Container - No padding, no weird borders! */}
+                  <div className="w-full h-36 sm:h-44 bg-bg1 relative flex items-center justify-center border-b border-border">
+                    <img
+                      src={`${partner.logo.url}?f_auto,q_auto,w_400`}
+                      alt={partner.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                    />
+                    {/* Darkens very slightly on hover instead of a white glare */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 dark:group-hover:bg-white/5 transition-colors duration-500 pointer-events-none"></div>
+                  </div>
+
+                  {/* Partner Name Area */}
+                  <div className="w-full py-5 text-center px-4">
+                    <span className="text-sm sm:text-base font-bold text-text tracking-wide group-hover:text-primary transition-colors duration-300">
+                      {partner.name}
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      
       {/* ================= FINAL CTA ================= */}
       <section className="pb-20">
         <Container>
@@ -376,5 +454,6 @@ export default function Home() {
         </Container>
       </section>
     </div>
+
   );
 }
