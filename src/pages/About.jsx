@@ -256,55 +256,64 @@ export default function About() {
         </Container>
       </section>
 
-      {reports.length > 0 && (
-        <section className="mt-20 sm:mt-28 pb-20">
-          <Container>
-            <div className="text-center mb-12 sm:mb-16">
-              <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">
-                Transparency
-              </span>
-              <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-serif">
-                Annual Reports
-              </h2>
-              <p className="mt-3 text-muted text-sm max-w-md mx-auto">
-                Explore our annual impact and financial reports.
-              </p>
-            </div>
+    {/* ================= ANNUAL REPORTS ================= */}
+{reports.length > 0 && (
+  <section className="mt-24 sm:mt-32 pb-24">
+    <Container>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 justify-items-center">
-              {reports.map((report) => (
-                <a
-                  key={report._id}
-                  href={report.flipbookUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group perspective"
-                >
-                  <div className="relative w-[150px] sm:w-[180px] transition-all duration-500 transform-style-3d group-hover:rotate-y-15">
+      <div className="text-center mb-16">
+        <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-primary">
+          Transparency
+        </span>
+        <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text">
+          Annual Reports
+        </h2>
+      </div>
 
-                    {/* Book spine shadow */}
-                    <div className="absolute -left-2 top-0 h-full w-3 bg-black/30 blur-sm rounded-l-md"></div>
+      <div className="flex justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-24 place-items-center">
 
-                    {/* Book cover */}
-                    <div className="rounded-lg overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
-                      <img
-                        src={`${report.coverImage.url}?f_auto,q_auto,w_600`}
-                        alt={report.title}
-                        loading="lazy"
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-                  </div>
+          {reports.map((report) => (
+            <a
+              key={report._id}
+              href={report.flipbookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="realbook group"
+            >
+              <div className="realbook-inner">
 
-                  <div className="mt-3 text-center text-xs font-semibold text-text">
-                    {report.year}
-                  </div>
-                </a>
-              ))}
-            </div>
-          </Container>
-        </section>
-      )}
+                {/* COVER */}
+                <div className="realbook-cover">
+                  <img
+                    src={`${report.coverImage.url}?f_auto,q_auto,w_900`}
+                    alt={report.title}
+                  />
+                </div>
+
+                {/* PAGES */}
+                <div className="realbook-pages"></div>
+
+              </div>
+
+              <div className="mt-6 text-center">
+                <div className="text-lg font-serif font-bold text-text">
+                  {report.title}
+                </div>
+                <div className="text-sm text-muted mt-1">
+                  {report.year}
+                </div>
+              </div>
+
+            </a>
+          ))}
+
+        </div>
+      </div>
+
+    </Container>
+  </section>
+)}
     </div>
 
 
