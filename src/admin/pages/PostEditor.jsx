@@ -23,17 +23,12 @@ export default function PostEditor({ mode }) {
 
   useEffect(() => {
     if (mode !== "edit" || !id) return;
-    let cancelled = false;
 
-    api
-      .get("/api/admin/posts")
+    api.get("/api/admin/posts")
       .then(({ data }) => {
-        if (cancelled) return;
-        const post = (data.posts || []).find((p) => p._id === id);
-        if (!post) {
-          setError("Post not found.");
-          return;
-        }
+        const post = data.posts.find((p) => p._id === id);
+        if (!post) return;
+
         setForm({
           title: post.title || "",
           excerpt: post.excerpt || "",
@@ -44,30 +39,28 @@ export default function PostEditor({ mode }) {
           coverImage: post.coverImage || null,
         });
       })
-      .catch(() => {
-        if (!cancelled) setError("Failed to load post.");
-      });
-
-    return () => {
-      cancelled = true;
-    };
+      .catch(() => setError("Failed to load post."));
   }, [mode, id]);
 
-  function setField(k, v) {
-    setForm((prev) => ({ ...prev, [k]: v }));
+  function setField(key, value) {
+    setForm((prev) => ({ ...prev, [key]: value }));
   }
 
   async function uploadCover(file) {
+    if (!file) return;
+
     setUploading(true);
     try {
       const fd = new FormData();
       fd.append("file", file);
+
       const { data } = await api.post("/api/admin/upload", fd, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
       setField("coverImage", data.image);
     } catch {
-      alert("Failed to upload image.");
+      alert("Upload failed");
     } finally {
       setUploading(false);
     }
@@ -76,15 +69,13 @@ export default function PostEditor({ mode }) {
   async function save(nextStatus) {
     setLoading(true);
     setError("");
+
     try {
       const payload = {
         title: form.title,
         excerpt: form.excerpt,
         category: form.category,
-        tags: form.tagsText
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean),
+        tags: form.tagsText.split(",").map((s) => s.trim()).filter(Boolean),
         content: form.content,
         coverImage: form.coverImage,
         status: nextStatus || form.status,
@@ -95,6 +86,7 @@ export default function PostEditor({ mode }) {
       } else {
         await api.put(`/api/admin/posts/${id}`, payload);
       }
+
       navigate("/admin/posts");
     } catch (err) {
       setError(err.response?.data?.message || "Failed to save post.");
@@ -104,136 +96,163 @@ export default function PostEditor({ mode }) {
   }
 
   return (
-    <div>
-      <div className="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-4 mb-6 sm:mb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+
+      {/* ================= HEADER ================= */}
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-10">
         <div>
-          <h2 className="text-xl sm:text-2xl font-serif font-bold text-text">
+          <h2 className="text-3xl font-serif font-bold text-text">
             {mode === "create" ? "Create Post" : "Edit Post"}
           </h2>
-          <p className="text-sm text-muted mt-1">
+          <p className="text-muted text-sm mt-2">
             Write your story using Markdown.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+
+        <div className="flex flex-wrap gap-3 w-full lg:w-auto">
           <Link
-            className="px-4 py-2.5 rounded-xl border border-border text-text text-xs sm:text-sm font-semibold hover:bg-bg1 transition text-center flex-1 sm:flex-none"
             to="/admin/posts"
+            className="px-5 py-2.5 rounded-xl border border-border text-sm font-semibold text-text hover:bg-bg1 transition"
           >
             Cancel
           </Link>
-          <button 
-            disabled={loading} 
+
+          <button
             onClick={() => save("draft")}
-            className="px-4 py-2.5 rounded-xl bg-bg1 border border-border text-text text-xs sm:text-sm font-semibold hover:bg-border transition disabled:opacity-50 text-center flex-1 sm:flex-none"
+            disabled={loading}
+            className="px-5 py-2.5 rounded-xl bg-panel border border-border text-sm font-semibold text-text hover:bg-bg1 transition disabled:opacity-50"
           >
             Save Draft
           </button>
-          <GradientButton disabled={loading} onClick={() => save("published")} className="flex-1 sm:flex-none py-2.5">
+
+          <GradientButton disabled={loading} onClick={() => save("published")}>
             Publish Post
           </GradientButton>
         </div>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 dark:text-red-400 text-sm font-medium">
+        <div className="mb-8 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm">
           {error}
         </div>
       )}
 
-      <div className="grid gap-4 sm:gap-6 lg:grid-cols-3 items-start">
-        {/* Editor Main Content */}
-        <div className="lg:col-span-2 grid gap-4 bg-panel border border-border rounded-2xl p-4 sm:p-6 shadow-sm">
+      {/* ================= GRID LAYOUT ================= */}
+      <div className="grid gap-8 lg:grid-cols-3">
+
+        {/* ================= MAIN CONTENT ================= */}
+        <div className="lg:col-span-2 bg-panel border border-border rounded-3xl p-8 space-y-8 shadow-sm">
+
+          {/* TITLE */}
           <div>
-            <label className="block text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase mb-2 ml-1">Post Title</label>
+            <label className="block text-xs font-bold tracking-widest text-muted uppercase mb-3">
+              Post Title
+            </label>
             <input
-              className="w-full rounded-xl bg-bg1 border border-border px-4 py-3 text-base sm:text-sm text-text placeholder-muted/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+              className="w-full rounded-xl bg-panel border border-border px-5 py-3 text-text focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
               placeholder="e.g. The Impact of Education..."
               value={form.title}
               onChange={(e) => setField("title", e.target.value)}
             />
           </div>
-          
+
+          {/* EXCERPT */}
           <div>
-            <label className="block text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase mb-2 ml-1">Short Excerpt</label>
+            <label className="block text-xs font-bold tracking-widest text-muted uppercase mb-3">
+              Short Excerpt
+            </label>
             <textarea
-              className="w-full rounded-xl bg-bg1 border border-border px-4 py-3 text-base sm:text-sm text-text placeholder-muted/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all min-h-[90px] resize-y"
-              placeholder="A brief summary for the blog card..."
+              className="w-full rounded-xl bg-panel border border-border px-5 py-3 text-text min-h-[120px] resize-y focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
+              placeholder="A short summary..."
               value={form.excerpt}
               onChange={(e) => setField("excerpt", e.target.value)}
             />
           </div>
 
+          {/* CONTENT */}
           <div>
-            <label className="block text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase mb-2 ml-1">Body Content (Markdown)</label>
+            <label className="block text-xs font-bold tracking-widest text-muted uppercase mb-3">
+              Body Content (Markdown)
+            </label>
             <textarea
-              className="w-full rounded-xl bg-bg1 border border-border px-4 py-3 text-base sm:text-sm text-text placeholder-muted/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all min-h-[350px] font-mono resize-y leading-relaxed"
-              placeholder="Write your content here using Markdown formatting..."
+              className="w-full rounded-xl bg-panel border border-border px-5 py-3 text-text min-h-[350px] font-mono resize-y focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
+              placeholder="Write your content here..."
               value={form.content}
               onChange={(e) => setField("content", e.target.value)}
             />
           </div>
+
         </div>
 
-        {/* Sidebar */}
-        <div className="grid gap-4 sm:gap-6">
-          <div className="rounded-2xl bg-panel border border-border p-4 sm:p-6 shadow-sm">
-            <div className="text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase mb-3">Cover Image</div>
-            <div className="aspect-[16/10] rounded-xl overflow-hidden bg-bg1 border border-border">
+        {/* ================= SIDEBAR ================= */}
+        <div className="space-y-8">
+
+          {/* COVER IMAGE */}
+          <div className="bg-panel border border-border rounded-3xl p-6 shadow-sm">
+            <div className="text-xs font-bold tracking-widest text-muted uppercase mb-4">
+              Cover Image
+            </div>
+
+            <div className="aspect-[16/10] rounded-xl overflow-hidden bg-panel border border-border flex items-center justify-center">
               {form.coverImage?.url ? (
                 <img
                   src={form.coverImage.url}
-                  alt="Cover preview"
-                  className="h-full w-full object-cover"
+                  alt="Cover"
+                  className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="h-full w-full flex items-center justify-center text-xs text-muted">
+                <span className="text-muted text-sm">
                   No Image Selected
-                </div>
+                </span>
               )}
             </div>
-            <div className="mt-4 relative">
-              <input
-                type="file"
-                accept="image/jpeg,image/png,image/webp,image/gif"
-                onChange={(e) => e.target.files?.[0] && uploadCover(e.target.files[0])}
-                className="block w-full text-xs text-muted file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 transition cursor-pointer"
-              />
-              {uploading && (
-                <div className="mt-3 text-xs font-medium text-primary animate-pulse">Uploading to Cloudinary...</div>
-              )}
+
+            <input
+              type="file"
+              accept="image/*"
+              className="mt-4 text-sm"
+              onChange={(e) =>
+                e.target.files?.[0] && uploadCover(e.target.files[0])
+              }
+            />
+
+            {uploading && (
+              <div className="mt-3 text-xs text-primary">
+                Uploading...
+              </div>
+            )}
+          </div>
+
+          {/* META */}
+          <div className="bg-panel border border-border rounded-3xl p-6 shadow-sm space-y-5">
+            <div className="text-xs font-bold tracking-widest text-muted uppercase">
+              Post Meta
+            </div>
+
+            <input
+              className="w-full rounded-xl bg-panel border border-border px-4 py-2 text-text focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
+              placeholder="Category"
+              value={form.category}
+              onChange={(e) => setField("category", e.target.value)}
+            />
+
+            <input
+              className="w-full rounded-xl bg-panel border border-border px-4 py-2 text-text focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
+              placeholder="Tags (comma separated)"
+              value={form.tagsText}
+              onChange={(e) => setField("tagsText", e.target.value)}
+            />
+
+            <div className="text-sm text-muted">
+              Current Status:{" "}
+              <span className="font-semibold text-text capitalize">
+                {form.status}
+              </span>
             </div>
           </div>
 
-          <div className="rounded-2xl bg-panel border border-border p-4 sm:p-6 shadow-sm">
-            <div className="text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase mb-3">Post Meta</div>
-            <div className="grid gap-4">
-              <div>
-                <label className="block text-xs text-muted mb-1.5 ml-1">Category</label>
-                <input
-                  className="w-full rounded-xl bg-bg1 border border-border px-3.5 py-2.5 text-base sm:text-sm text-text placeholder-muted/50 outline-none focus:border-primary transition-all"
-                  placeholder="e.g. Education"
-                  value={form.category}
-                  onChange={(e) => setField("category", e.target.value)}
-                />
-              </div>
-              <div>
-                <label className="block text-xs text-muted mb-1.5 ml-1">Tags (Comma separated)</label>
-                <input
-                  className="w-full rounded-xl bg-bg1 border border-border px-3.5 py-2.5 text-base sm:text-sm text-text placeholder-muted/50 outline-none focus:border-primary transition-all"
-                  placeholder="news, event, update"
-                  value={form.tagsText}
-                  onChange={(e) => setField("tagsText", e.target.value)}
-                />
-              </div>
-              <div className="pt-2 mt-2 border-t border-border flex items-center justify-between text-sm">
-                <span className="text-muted">Current Status:</span>
-                <span className={`font-bold capitalize ${form.status === 'published' ? 'text-green-500' : 'text-yellow-500'}`}>
-                  {form.status}
-                </span>
-              </div>
-            </div>
-          </div>
         </div>
+
       </div>
     </div>
   );
