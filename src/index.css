@@ -109,3 +109,16 @@ body {
 .animate-partner-scroll:hover {
   animation-play-state: paused;
 }
+
+.perspective {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.group-hover\:rotate-y-15 {
+  transform: rotateY(-18deg);
+  transition: transform 0.5s ease;
+}

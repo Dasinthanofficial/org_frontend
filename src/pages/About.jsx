@@ -1,24 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { api } from "../lib/api";
 import Container from "../components/Container.jsx";
 import { Link } from "react-router-dom";
 
 import education from "../assets/Education.jpeg";
-import livelihood from "../assets/Livelihoods.jpeg"; 
+import livelihood from "../assets/Livelihoods.jpeg";
 import health from "../assets/Health.jpeg";
 import environment from "../assets/Environment.jpeg";
 import parenting from "../assets/Parenting.jpeg";
 
 export default function About() {
+
+  const [reports, setReports] = useState([]);
+
+  useEffect(() => {
+    api.get("/api/reports")
+      .then(({ data }) => setReports(data.reports || []))
+      .catch(console.error);
+  }, []);
   return (
+
+
     <div className="pb-20 overflow-hidden bg-bg0 text-text transition-colors duration-300">
-      
+
       {/* ===== HERO SECTION (Vision & Mission) ===== */}
       <section className="relative w-full py-24 lg:py-36 overflow-hidden flex items-center justify-center">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src={education} 
-            alt="Background" 
+          <img
+            src={education}
+            alt="Background"
             className="w-full h-full object-cover"
           />
           {/* Dark Overlay */}
@@ -27,15 +38,14 @@ export default function About() {
 
         <Container className="relative z-10">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-24 text-center text-white">
-            
+
             {/* Vision */}
             <div className="flex flex-col items-center">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6 tracking-wide">
                 Our Vision
               </h1>
               <p className="text-base md:text-lg lg:text-xl font-light max-w-md mx-auto leading-relaxed text-gray-200">
-               A society where all individuals are empowered, included, and thrive together in 
-harmony.
+                A society where all individuals are empowered, included, and thrive together in harmony.
               </p>
             </div>
 
@@ -45,8 +55,7 @@ harmony.
                 Our Mission
               </h1>
               <p className="text-base md:text-lg lg:text-xl font-light max-w-lg mx-auto leading-relaxed text-gray-200">
-               Our mission is to empower individuals with knowledge, resource, and networks to 
-create sustainable changes in communities.
+                Our mission is to empower individuals with knowledge, resource, and networks to create sustainable changes in communities.
               </p>
             </div>
 
@@ -80,7 +89,7 @@ create sustainable changes in communities.
               </div>
             </div>
 
-            {/* Right Text Content (Added to fix blank space) */}
+            {/* Right Text Content */}
             <div className="text-center md:text-left">
               <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">Our History</span>
               <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-serif text-text">From Humble Beginnings</h2>
@@ -91,13 +100,12 @@ create sustainable changes in communities.
                 Today, we continue to grow, believing that every individual possesses the potential to transform their world given the right tools and opportunities.
               </p>
             </div>
-            
+
           </div>
         </Container>
       </section>
 
       {/* ===== CORE VALUES ===== */}
-      {/* Reduced margin from mt-40 to mt-28 for better spacing */}
       <section className="mt-20 md:mt-28">
         <Container>
           <div className="mb-8 sm:mb-12 text-center sm:text-left">
@@ -126,34 +134,37 @@ create sustainable changes in communities.
         </Container>
       </section>
 
-      {/* ===== AREAS OF FOCUS ===== */}
-      <section className="mt-20 md:mt-28">
-        <Container>
-          <div className="text-center mb-12 sm:mb-16">
-            <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">Our Programs</span>
-            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-serif text-text">Five Areas of Focus</h2>
-            <p className="mt-4 text-muted text-sm max-w-lg mx-auto leading-relaxed">Our programs span five key areas addressing the most pressing needs.</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { title: "Child Development", desc: "Literacy, scholarships", img: education },
-              { title: "Health", desc: "Medical camps", img: health },
-              { title: "Environment", desc: "Conservation", img: environment },
-              { title: "Livelihoods", desc: "Skills training", img: livelihood },
-              { title: "Parenting", desc: "Mother Design", img: parenting },
-            ].map((area, i) => (
-              <div key={i} className="group relative rounded-[2rem] p-8 text-center bg-panel border border-border hover:border-primary transition-all duration-500 hover:-translate-y-1 hover:shadow-lg flex flex-col items-center">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 mb-6 rounded-2xl overflow-hidden shadow-lg group-hover:scale-110 transition-transform duration-500 border border-border">
-                  <img src={area.img} alt={area.title} className="w-full h-full object-cover" />
-                </div>
-                <h3 className="text-lg font-serif text-text mb-3">{area.title}</h3>
-                <p className="text-xs text-muted leading-relaxed font-light">{area.desc}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      {/* ===== SECONDARY BACKGROUND WRAPPER ===== */}
+      <div className="bg-bg1 pb-20">
 
+        {/* ===== AREAS OF FOCUS ===== */}
+        <section className="mt-20 md:mt-28">
+          <Container>
+            <div className="text-center mb-12 sm:mb-16">
+              <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">Our Programs</span>
+              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-serif text-text">Five Areas of Focus</h2>
+              <p className="mt-4 text-muted text-sm max-w-lg mx-auto leading-relaxed">Our programs span five key areas addressing the most pressing needs.</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {[
+                { title: "Child Development", desc: "Literacy, scholarships", img: education },
+                { title: "Health", desc: "Medical camps", img: health },
+                { title: "Environment", desc: "Conservation", img: environment },
+                { title: "Livelihoods", desc: "Skills training", img: livelihood },
+                { title: "Parenting", desc: "Mother Design", img: parenting },
+              ].map((area, i) => (
+                <div key={i} className="group relative rounded-[2rem] p-8 text-center bg-panel border border-border hover:border-primary transition-all duration-500 hover:-translate-y-1 hover:shadow-lg flex flex-col items-center">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 mb-6 rounded-2xl overflow-hidden shadow-lg group-hover:scale-110 transition-transform duration-500 border border-border">
+                    <img src={area.img} alt={area.title} className="w-full h-full object-cover" />
+                  </div>
+                  <h3 className="text-lg font-serif text-text mb-3">{area.title}</h3>
+                  <p className="text-xs text-muted leading-relaxed font-light">{area.desc}</p>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </section>
+      </div>
       {/* ===== GOVERNANCE ===== */}
       <section className="mt-20 md:mt-28">
         <Container>
@@ -171,20 +182,26 @@ create sustainable changes in communities.
                 { name: "Mr. N. Paraneeswaran", role: "Chairman / Director" },
                 { name: "Mr. R. Ramiro", role: "Secretary" },
                 { name: "Pas M. Neethiraja Titus", role: "Treasurer / Accountant" },
-              ].map((m, i) => (
-                <div key={i} className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center border border-border flex flex-col items-center justify-center">
-                  <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-primary/10 border border-border flex items-center justify-center text-primary text-base sm:text-lg font-bold mb-2">
-                    {m.name.charAt(m.name.indexOf(".") + 2)}
+              ].map((m, i) => {
+                // Safe extraction of initial after dot, or first letter if no dot
+                const dotIndex = m.name.indexOf(".");
+                const initial = dotIndex !== -1 ? m.name.charAt(dotIndex + 2) : m.name.charAt(0);
+
+                return (
+                  <div key={i} className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center border border-border flex flex-col items-center justify-center">
+                    <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-primary/10 border border-border flex items-center justify-center text-primary text-base sm:text-lg font-bold mb-2">
+                      {initial}
+                    </div>
+                    <h4 className="text-xs sm:text-sm font-semibold text-text leading-tight">{m.name}</h4>
+                    <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full border border-border bg-primary/10 text-[8px] sm:text-[9px] tracking-wider font-bold text-primary uppercase">
+                      {m.role}
+                    </span>
                   </div>
-                  <h4 className="text-xs sm:text-sm font-semibold text-text leading-tight">{m.name}</h4>
-                  <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full border border-border bg-primary/10 text-[8px] sm:text-[9px] tracking-wider font-bold text-primary uppercase">
-                    {m.role}
-                  </span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
-          
+
           {/* Members */}
           <div className="mb-10 sm:mb-12">
             <h3 className="text-sm sm:text-base font-semibold mb-4 sm:mb-5 text-center text-muted">Board Members</h3>
@@ -223,7 +240,7 @@ create sustainable changes in communities.
       </section>
 
       {/* ===== FINANCIAL TRANSPARENCY ===== */}
-      <section className="mt-10 sm:mt-16">
+      <section className="mt-10 sm:mt-16 pb-20">
         <Container>
           <div className="glass rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 md:p-12 text-center border border-border">
             <div className="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 mx-auto mb-4 sm:mb-6">
@@ -238,6 +255,58 @@ create sustainable changes in communities.
           </div>
         </Container>
       </section>
+
+      {reports.length > 0 && (
+        <section className="mt-20 sm:mt-28 pb-20">
+          <Container>
+            <div className="text-center mb-12 sm:mb-16">
+              <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">
+                Transparency
+              </span>
+              <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-serif">
+                Annual Reports
+              </h2>
+              <p className="mt-3 text-muted text-sm max-w-md mx-auto">
+                Explore our annual impact and financial reports.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 justify-items-center">
+              {reports.map((report) => (
+                <a
+                  key={report._id}
+                  href={report.flipbookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group perspective"
+                >
+                  <div className="relative w-[150px] sm:w-[180px] transition-all duration-500 transform-style-3d group-hover:rotate-y-15">
+
+                    {/* Book spine shadow */}
+                    <div className="absolute -left-2 top-0 h-full w-3 bg-black/30 blur-sm rounded-l-md"></div>
+
+                    {/* Book cover */}
+                    <div className="rounded-lg overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                      <img
+                        src={`${report.coverImage.url}?f_auto,q_auto,w_600`}
+                        alt={report.title}
+                        loading="lazy"
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-3 text-center text-xs font-semibold text-text">
+                    {report.year}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
     </div>
+
+
   );
 }

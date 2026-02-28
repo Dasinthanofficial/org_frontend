@@ -41,35 +41,42 @@ export default function AdminLayout() {
           <nav className="hidden md:flex items-center gap-2">
             <Link
               to="/admin/posts"
-              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase ${
-                isActive("/posts")
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted hover:text-text"
-              }`}
+              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase ${isActive("/posts")
+                ? "bg-primary/10 text-primary"
+                : "text-muted hover:text-text"
+                }`}
             >
               Posts
             </Link>
 
             <Link
               to="/admin/hero"
-              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase ${
-                isActive("/hero")
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted hover:text-text"
-              }`}
+              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase ${isActive("/hero")
+                ? "bg-primary/10 text-primary"
+                : "text-muted hover:text-text"
+                }`}
             >
               Hero
             </Link>
 
             <Link
               to="/admin/partners"
-              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase ${
-                isActive("/partners")
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted hover:text-text"
-              }`}
+              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase ${isActive("/partners")
+                ? "bg-primary/10 text-primary"
+                : "text-muted hover:text-text"
+                }`}
             >
               Partners
+            </Link>
+
+            <Link
+              to="/admin/reports"
+              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase ${isActive("/reports")
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted hover:text-text"
+                }`}
+            >
+              Reports
             </Link>
 
             <ThemeToggle />
@@ -132,6 +139,16 @@ export default function AdminLayout() {
               className="block px-4 py-2 rounded-xl text-sm font-semibold hover:bg-bg1"
             >
               Partners
+            </Link>
+
+            <Link
+              to="/admin/reports"
+              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase ${isActive("/reports")
+                ? "bg-primary/10 text-primary"
+                : "text-muted hover:text-text"
+                }`}
+            >
+              Reports
             </Link>
 
             <button
