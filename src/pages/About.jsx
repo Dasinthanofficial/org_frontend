@@ -256,64 +256,73 @@ export default function About() {
         </Container>
       </section>
 
-    {/* ================= ANNUAL REPORTS ================= */}
-{reports.length > 0 && (
-  <section className="mt-24 sm:mt-32 pb-24">
-    <Container>
+      {/* ================= ANNUAL REPORTS ================= */}
+      {reports.length > 0 && (
+        <section className="mt-24 sm:mt-32 pb-24 overflow-visible">
+          <Container>
 
-      <div className="text-center mb-16">
-        <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-primary">
-          Transparency
-        </span>
-        <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text">
-          Annual Reports
-        </h2>
-      </div>
+            <div className="text-center mb-16">
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-primary">
+                Transparency
+              </span>
+              <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text">
+                Annual Reports
+              </h2>
+              <p className="mt-4 text-muted text-sm max-w-lg mx-auto">
+                Hover over the books to view our yearly progress.
+              </p>
+            </div>
 
-      <div className="flex justify-center">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-24 place-items-center">
+            {/* Grid container needs distinct perspective for each item or sufficient spacing */}
+            <div className="flex flex-wrap justify-center gap-12 sm:gap-16 lg:gap-24">
+              {reports.map((report) => (
+                <div key={report._id} className="group relative">
 
-          {reports.map((report) => (
-            <a
-              key={report._id}
-              href={report.flipbookUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="realbook group"
-            >
-              <div className="realbook-inner">
+                  {/* 3D BOOK LINK */}
+                  <a
+                    href={report.flipbookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="realbook block cursor-pointer"
+                  >
+                    <div className="realbook-inner aspect-[210/297]">
 
-                {/* COVER */}
-                <div className="realbook-cover">
-                  <img
-                    src={`${report.coverImage.url}?f_auto,q_auto,w_900`}
-                    alt={report.title}
-                  />
+                      {/* FRONT COVER */}
+                      <div className="realbook-cover">
+                        <img
+                          src={`${report.coverImage.url}?f_auto,q_auto,w_800`}
+                          alt={report.title}
+                        />
+                      </div>
+
+                      {/* SPINE */}
+                      <div className="realbook-spine"></div>
+
+                      {/* PAGES */}
+                      <div className="realbook-pages"></div>
+
+                      {/* BACK */}
+                      <div className="realbook-back"></div>
+
+                    </div>
+                  </a>
+
+                  {/* TEXT LABEL (Below the book) */}
+                  <div className="mt-10 text-center opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 className="text-lg font-serif font-bold text-text">
+                      {report.title}
+                    </h3>
+                    <p className="text-xs text-primary font-bold tracking-widest uppercase mt-1">
+                      {report.year}
+                    </p>
+                  </div>
                 </div>
+              ))}
+            </div>
 
-                {/* PAGES */}
-                <div className="realbook-pages"></div>
-
-              </div>
-
-              <div className="mt-6 text-center">
-                <div className="text-lg font-serif font-bold text-text">
-                  {report.title}
-                </div>
-                <div className="text-sm text-muted mt-1">
-                  {report.year}
-                </div>
-              </div>
-
-            </a>
-          ))}
-
-        </div>
-      </div>
-
-    </Container>
-  </section>
-)}
+          </Container>
+        </section>
+      )}
     </div>
 
 
