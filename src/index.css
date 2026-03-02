@@ -2,29 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
 /* ================= DEFAULT (LIGHT MODE) ================= */
 
 :root {
   --bg-0: #FFFFFF;
   --bg-1: #006D77;
-=======
-/* DEFAULT (LIGHT MODE) */
-:root {
-  --bg-0: #FFFFFF;
-  --bg-1: #8B5CF6;
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
   --panel: #FFFFFF;
   --panel-2: #F9FAFB;
 
   --text: #1F2937;
-<<<<<<< HEAD
   --muted: #6B7280;
   /* ✅ Fixed */
-=======
-  /* Dark Gray text */
-  --muted:#000000;
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
   --muted-2: #9CA3AF;
 
   --primary: #8B5CF6;
@@ -35,7 +23,6 @@
   --glass-border: rgba(0, 0, 0, 0.05);
 }
 
-<<<<<<< HEAD
 /* ================= DARK MODE ================= */
 
 .dark {
@@ -43,13 +30,6 @@
 
   --bg-0: #05030A;
   --bg-1: #8B5CF6;
-=======
-/* DARK MODE OVERRIDES */
-.dark {
-  color-scheme: dark;
-  --bg-0: #05030A;
-  --bg-1:#8B5CF6;
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
   --panel: #100A1C;
   --panel-2: #140C24;
 
@@ -65,18 +45,12 @@
   --glass-border: rgba(167, 139, 250, 0.14);
 }
 
-<<<<<<< HEAD
 /* ================= GLOBAL ================= */
 
 html,
 body {
   height: 100%;
   overflow-x: hidden;
-=======
-html,
-body {
-  height: 100%;
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
 }
 
 body {
@@ -85,11 +59,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-<<<<<<< HEAD
 /* Subtle dark glow */
-=======
-/* Apply background pattern only in dark mode if desired, or adjust opacity for light */
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
 .dark body {
   background-image:
     radial-gradient(900px 600px at 20% 10%, rgba(139, 92, 246, 0.15), transparent 55%),
@@ -97,31 +67,21 @@ body {
     radial-gradient(900px 600px at 60% 90%, rgba(109, 40, 217, 0.1), transparent 50%);
 }
 
-<<<<<<< HEAD
 /* ================= GLASS ================= */
 
-=======
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
 .glass {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(12px);
-<<<<<<< HEAD
   -webkit-backdrop-filter: blur(12px);
-=======
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
 }
 
 .hr-soft {
   border-color: var(--border);
 }
 
-<<<<<<< HEAD
 /* ================= SCROLLBAR ================= */
 
-=======
-/* Scrollbar logic */
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -139,21 +99,13 @@ body {
   background: rgba(139, 92, 246, 0.5);
 }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
 /* ================= PARTNER CAROUSEL ================= */
 
 @keyframes partnerScroll {
   0% {
     transform: translateX(0);
   }
-<<<<<<< HEAD
 
-=======
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
   100% {
     transform: translateX(-50%);
   }
@@ -167,7 +119,6 @@ body {
   animation-play-state: paused;
 }
 
-<<<<<<< HEAD
 /* ================= CLEAN 3D BOOK (FINAL VERSION) ================= */
 
 .realbook {
@@ -186,168 +137,6 @@ body {
   .realbook {
     width: 260px;
   }
-=======
-.perspective {
-  perspective: 1000px;
-}
-
-.transform-style-3d {
-  transform-style: preserve-3d;
-}
-
-.group-hover\:rotate-y-15 {
-  transform: rotateY(-18deg);
-  transition: transform 0.5s ease;
-}
-
-/* ================= REALISTIC 3D BOOK ================= */
-
-.book {
-  width: 200px;
-  perspective: 1200px;
-}
-
-@media (min-width: 640px) {
-  .book { width: 240px; }
-}
-
-@media (min-width: 1024px) {
-  .book { width: 260px; }
-}
-
-.book-inner {
-  position: relative;
-  width: 100%;
-  height: 280px;
-  transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(.25,.8,.25,1);
-}
-
-.book:hover .book-inner {
-  transform: rotateY(-25deg);
-}
-
-.book-front,
-.book-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 6px;
-  overflow: hidden;
-  backface-visibility: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-.book-front img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.book-back {
-  background: var(--panel);
-  transform: rotateY(180deg);
-}
-
-.book-spine {
-  position: absolute;
-  left: -6px;
-  top: 0;
-  width: 12px;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(0,0,0,0.4),
-    rgba(0,0,0,0.1)
-  );
-  transform: rotateY(90deg);
-  transform-origin: left;
-  border-radius: 3px;
-}
-
-
-/* ================= MODERN 3D OPEN BOOK ================= */
-
-.book3d {
-  width: 200px;
-  perspective: 1600px;
-}
-
-@media (min-width: 640px) {
-  .book3d { width: 240px; }
-}
-
-@media (min-width: 1024px) {
-  .book3d { width: 260px; }
-}
-
-.book3d-inner {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(.25,.8,.25,1);
-}
-
-/* Cover rotates open */
-.book3d-cover {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  transform-origin: left;
-  transition: transform 0.8s cubic-bezier(.25,.8,.25,1);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-  backface-visibility: hidden;
-}
-
-.book3d-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Pages */
-.book3d-pages {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    #f8f8f8 0%,
-    #ffffff 40%,
-    #f0f0f0 100%
-  );
-  border-radius: 8px;
-  transform: translateZ(-2px);
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-}
-
-/* Hover effect */
-.book3d:hover .book3d-cover {
-  transform: rotateY(-160deg);
-}
-
-/* Slight book tilt for realism */
-.book3d:hover .book3d-inner {
-  transform: rotateY(10deg);
-}
-
-/* ================= REALISTIC SLOW 3D BOOK ================= */
-
-.realbook {
-  width: 200px;
-  perspective: 2000px;
-}
-
-@media (min-width: 640px) {
-  .realbook { width: 240px; }
-}
-
-@media (min-width: 1024px) {
-  .realbook { width: 260px; }
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
 }
 
 .realbook-inner {
@@ -355,7 +144,6 @@ body {
   width: 100%;
   height: 320px;
   transform-style: preserve-3d;
-<<<<<<< HEAD
   transition: transform 0.8s ease;
 }
 
@@ -367,15 +155,11 @@ body {
   border-radius: 8px;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.08);
   z-index: 1;
-=======
-  transition: transform 1.2s cubic-bezier(.22,.61,.36,1);
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
 }
 
 /* Cover */
 .realbook-cover {
   position: absolute;
-<<<<<<< HEAD
   inset: 0;
   border-radius: 8px;
   overflow: hidden;
@@ -383,16 +167,6 @@ body {
   transition: transform 0.8s ease;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
   z-index: 2;
-=======
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  transform-origin: left;
-  transition: transform 1.2s cubic-bezier(.22,.61,.36,1);
-  backface-visibility: hidden;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
 }
 
 .realbook-cover img {
@@ -401,7 +175,6 @@ body {
   object-fit: cover;
 }
 
-<<<<<<< HEAD
 /* Spine */
 .realbook-spine {
   position: absolute;
@@ -419,190 +192,4 @@ body {
 /* Hover open effect */
 .realbook:hover .realbook-cover {
   transform: rotateY(-110deg);
-=======
-/* Pages */
-.realbook-pages {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    #f7f7f7 0%,
-    #ffffff 40%,
-    #f0f0f0 100%
-  );
-  border-radius: 8px;
-  transform: translateZ(-3px);
-  box-shadow:
-    inset 0 0 10px rgba(0,0,0,0.08),
-    0 15px 40px rgba(0,0,0,0.1);
-}
-
-/* Smooth open effect */
-.realbook:hover .realbook-cover {
-  transform: rotateY(-150deg);
-}
-
-.realbook:hover .realbook-inner {
-  transform: rotateY(8deg);
-}
-
-/* ================= REALISTIC 3D BOOK ANIMATION ================= */
-
-.realbook {
-  position: relative;
-  width: 220px;
-  height: 320px;
-  perspective: 2000px;
-  z-index: 10;
-}
-
-/* The wrapper that holds the 3D object */
-.realbook-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transform: rotateY(-25deg) rotateX(5deg); /* Initial resting angle */
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* Hover Interaction: Rotates the whole book to face the user slightly */
-.realbook:hover .realbook-inner {
-  transform: rotateY(-10deg) rotateX(0deg) translateZ(20px);
-}
-
-/* ================= THE COVER ================= */
-.realbook-cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 4px 6px 6px 4px;
-  transform-origin: left; /* Opens like a book */
-  transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: 5;
-}
-
-/* The Image itself */
-.realbook-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 4px 6px 6px 4px;
-  box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.1); /* Spine crease */
-}
-
-/* Front Cover Gloss/Lighting */
-.realbook-cover::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    45deg, 
-    transparent 40%, 
-    rgba(255, 255, 255, 0.2) 50%, 
-    transparent 60%
-  );
-  border-radius: 4px 6px 6px 4px;
-  opacity: 0;
-  transition: opacity 0.5s;
-  pointer-events: none;
-}
-
-.realbook:hover .realbook-cover::after {
-  opacity: 1;
-}
-
-/* Inside of the Front Cover (Left Page when open) */
-.realbook-cover::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #fdfbf7; /* Off-white paper */
-  border-radius: 4px 0 0 4px;
-  transform: translateZ(-2px); /* Slight thickness */
-  box-shadow: inset -5px 0 10px rgba(0,0,0,0.1);
-}
-
-/* Open Animation */
-.realbook:hover .realbook-cover {
-  transform: rotateY(-140deg); /* Opens the cover */
-}
-
-/* ================= THE SPINE ================= */
-.realbook-spine {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px; /* Thickness of the book */
-  height: 100%;
-  background: linear-gradient(90deg, #ccc 0%, #eee 40%, #ccc 100%);
-  transform: rotateY(90deg) translateX(-20px); /* Position it on the side */
-  transform-origin: center;
-  z-index: 1;
-  border-radius: 2px;
-}
-
-/* Spine Text (Optional - visual detail) */
-.realbook-spine::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.1);
-}
-
-/* ================= THE PAGES (Right side block) ================= */
-.realbook-pages {
-  position: absolute;
-  top: 2px;
-  left: 3px;
-  width: 98%;
-  height: 98%;
-  background: #fff;
-  background: repeating-linear-gradient(
-    90deg,
-    #fff 0px,
-    #f9f9f9 2px,
-    #fff 4px
-  );
-  transform: translateZ(-20px); /* Pushes pages behind cover */
-  border-radius: 0 4px 4px 0;
-  box-shadow: 
-    5px 5px 15px rgba(0,0,0,0.15), /* Small shadow */
-    inset 0 0 20px rgba(0,0,0,0.05); /* Inner page depth */
-  z-index: 1;
-}
-
-/* ================= THE BACK COVER ================= */
-.realbook-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--panel);
-  border-radius: 4px 6px 6px 4px;
-  transform: translateZ(-40px); /* Pushes back cover behind pages */
-  box-shadow: 20px 20px 50px rgba(0,0,0,0.5); /* Deep Drop Shadow */
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 640px) {
-  .realbook { width: 160px; height: 240px; }
-  .realbook-spine { width: 30px; transform: rotateY(90deg) translateX(-15px); }
-  .realbook-pages { transform: translateZ(-15px); }
-  .realbook-back { transform: translateZ(-30px); }
->>>>>>> cfd3eb54f09214581c8881025cf439bd3363208f
 }
