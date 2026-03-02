@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================= DEFAULT (LIGHT MODE) ================= */
+
+:root {
+  --bg-0: #FFFFFF;
+  --bg-1: #006D77;
+  --panel: #FFFFFF;
+  --panel-2: #F9FAFB;
+
+  --text: #1F2937;
+  --muted: #6B7280;
+  /* ✅ Fixed */
+  --muted-2: #9CA3AF;
+
+  --primary: #8B5CF6;
+  --primary-2: #A78BFA;
+  --border: rgba(139, 92, 246, 0.15);
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.05);
+}
+
+/* ================= DARK MODE ================= */
+
+.dark {
+  color-scheme: dark;
+
+  --bg-0: #05030A;
+  --bg-1: #8B5CF6;
+  --panel: #100A1C;
+  --panel-2: #140C24;
+
+  --text: #F5F3FF;
+  --muted: rgba(245, 243, 255, 0.72);
+  --muted-2: rgba(245, 243, 255, 0.5);
+
+  --primary: #8B5CF6;
+  --primary-2: #A78BFA;
+  --border: rgba(167, 139, 250, 0.14);
+
+  --glass-bg: rgba(16, 10, 28, 0.72);
+  --glass-border: rgba(167, 139, 250, 0.14);
+}
+
+/* ================= GLOBAL ================= */
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-0);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Subtle dark glow */
+.dark body {
+  background-image:
+    radial-gradient(900px 600px at 20% 10%, rgba(139, 92, 246, 0.15), transparent 55%),
+    radial-gradient(700px 500px at 85% 30%, rgba(167, 139, 250, 0.1), transparent 50%),
+    radial-gradient(900px 600px at 60% 90%, rgba(109, 40, 217, 0.1), transparent 50%);
+}
+
+/* ================= GLASS ================= */
+
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hr-soft {
+  border-color: var(--border);
+}
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
+
+/* ================= PARTNER CAROUSEL ================= */
+
+@keyframes partnerScroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-partner-scroll {
+  animation: partnerScroll 30s linear infinite;
+}
+
+.animate-partner-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* ================= CLEAN 3D BOOK (FINAL VERSION) ================= */
+
+.realbook {
+  width: 200px;
+  perspective: 1500px;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .realbook {
+    width: 240px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .realbook {
+    width: 260px;
+  }
+}
+
+.realbook-inner {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+/* Pages (behind cover) */
+.realbook-pages {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+}
+
+/* Cover */
+.realbook-cover {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  transform-origin: left;
+  transition: transform 0.8s ease;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+
+.realbook-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Spine */
+.realbook-spine {
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 12px;
+  height: 100%;
+  background: linear-gradient(to right,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.1));
+  border-radius: 3px;
+  z-index: 0;
+}
+
+/* Hover open effect */
+.realbook:hover .realbook-cover {
+  transform: rotateY(-110deg);
+}
