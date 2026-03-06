@@ -64,46 +64,46 @@ export default function About() {
       </section>
 
       {/* ===== OUR JOURNEY ===== */}
-      <section className="mt-16 md:mt-24">
-        <Container>
-          <div className="grid md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 lg:gap-24 items-center">
-            {/* Left Image Card */}
-            <div className="relative max-w-sm sm:max-w-md mx-auto md:max-w-none md:ml-0">
-              <div className="glass rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden aspect-[4/5] bg-black/40 border border-border relative">
-                <div className="absolute inset-0 flex flex-col items-center justify-center z-10 p-6 sm:p-8 text-center">
-                  <svg className="w-10 sm:w-12 h-10 sm:h-12 text-white/80 mb-3 sm:mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight drop-shadow-lg">
-                    Bright Futures<br />Education
-                  </h3>
-                  <p className="mt-2 text-[10px] sm:text-xs text-white/70 max-w-[200px]">
-                    Iyakkachchi Education Center
-                  </p>
-                </div>
-                <img
-                  src="https://images.unsplash.com/photo-1497375638960-ca368c7231e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                  alt="Iyakkachchi"
-                  className="absolute inset-0 w-full h-full object-cover grayscale opacity-40 mix-blend-overlay"
-                />
-              </div>
-            </div>
+  {/* ===== OUR JOURNEY ===== */}
+<section className="mt-16 md:mt-24">
+  <Container>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 lg:gap-24 items-center">
+      
+      {/* LEFT: IMAGE */}
+      <div className="relative w-full max-w-sm sm:max-w-md mx-auto md:max-w-none">
+        <div className="glass rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden aspect-[4/5] bg-black/40 border border-border relative">
+          
+      
+          {/* Background image */}
+          <img
+            src="https://images.unsplash.com/photo-1497375638960-ca368c7231e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Iyakkachchi"
+            className="absolute inset-0 w-full h-full object-cover "
+          />
 
-            {/* Right Text Content */}
-            <div className="text-center md:text-left">
-              <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">Our History</span>
-              <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-serif text-text">From Humble Beginnings</h2>
-              <p className="mt-4 text-muted text-sm leading-loose">
-                Established in 2008, our journey began with a vision to rebuild lives and restore hope in Kilinochchi. Over the years, we have expanded our reach, establishing the Iyakkachchi Education Center in 2020 to serve the growing needs of the community.
-              </p>
-              <p className="mt-4 text-muted text-sm leading-loose">
-                Today, we continue to grow, believing that every individual possesses the potential to transform their world given the right tools and opportunities.
-              </p>
-            </div>
+        
+        </div>
+      </div>
 
-          </div>
-        </Container>
-      </section>
+      {/* RIGHT: TEXT (unchanged) */}
+      <div className="text-center md:text-left">
+        <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">
+          Our History
+        </span>
+        <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-serif text-text">
+          From Humble Beginnings
+        </h2>
+        <p className="mt-4 text-muted text-sm leading-loose">
+          Established in 2008, our journey began with a vision to rebuild lives and restore hope in Kilinochchi. Over the years, we have expanded our reach, establishing the Education program in Iyakkachchi in 2020 to serve the growing needs of the community.
+        </p>
+        <p className="mt-4 text-muted text-sm leading-loose">
+          Today, we continue to grow, believing that every individual possesses the potential to transform their world given the right tools and opportunities.
+        </p>
+      </div>
+
+    </div>
+  </Container>
+</section>
 
       {/* ===== CORE VALUES ===== */}
       <section className="mt-20 md:mt-28">
